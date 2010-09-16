@@ -130,3 +130,6 @@ by using nxml's indentation rules."
 
 (ad-activate 'move-beginning-of-line)
 
+(defun kill-current-buffer ()
+  (interactive)
+  (kill-buffer (current-buffer)))

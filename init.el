@@ -16,6 +16,9 @@
 ;;; ============
 (autoload 'ruby-mode "ruby-mode" "Major mode for ruby files" t)
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
 (add-hook 'ruby-mode-hook
@@ -30,7 +33,9 @@
 ;;; ===============================
 (autoload 'haml-mode "haml-mode" "" t)
 (autoload 'sass-mode "sass-mode" "" t)
+
 (autoload 'yaml-mode "yaml-mode" "" t)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;;; Rails support
 ;;; =============
@@ -132,7 +137,9 @@
 
 (global-set-key "\C-t" 'ido-goto-symbol)
 (global-set-key "A" 'apropos)
-
+(global-set-key (kbd "M-k") 'bury-buffer)
+(global-set-key (kbd "M-C-k") 'kill-current-buffer))
+(global-set-key (kbd "M-K") 'delete-window)
 ;;; Faster point movement
 ;;; =====================
 (global-set-key "\M-\C-p"
