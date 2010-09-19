@@ -138,7 +138,7 @@
 (global-set-key "\C-t" 'ido-goto-symbol)
 (global-set-key "A" 'apropos)
 (global-set-key (kbd "M-k") 'bury-buffer)
-(global-set-key (kbd "M-C-k") 'kill-current-buffer))
+(global-set-key (kbd "M-C-k") 'kill-current-buffer)
 (global-set-key (kbd "M-K") 'delete-window)
 ;;; Faster point movement
 ;;; =====================
