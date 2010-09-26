@@ -285,6 +285,11 @@
     (load local-config-filename)))
 
 
+;;; Start the server so we can use emacsclient from the command line
+;;; ================================================================
+(server-start)
+
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
