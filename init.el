@@ -290,10 +290,17 @@
     (load local-config-filename)))
 
 
+;;; Load YAS
+;;; ========
+(add-to-list 'load-path
+                  "~/.emacs.d/lib/yasnippet-0.6.1c")
+(require 'yasnippet) 
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/lib/yasnippet-0.6.1c/snippets")
+
 ;;; Start the server so we can use emacsclient from the command line
 ;;; ================================================================
 (server-start)
-
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
