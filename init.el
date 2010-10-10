@@ -4,6 +4,11 @@
                               "~/.emacs.d/lib"
                               "~/.emacs.d/color-theme-6.6.0") load-path))
 
+;;; Load ELPA
+;;; =========
+(require 'package)
+
+
 ;;; UTF-8 encoding
 ;;; ==============
 (setq locale-coding-system 'utf-8)
