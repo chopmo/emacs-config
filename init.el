@@ -303,6 +303,13 @@
 ;;; ================================================================
 (server-start)
 
+
+;;; A few orgmode tweaks
+;;; ====================
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -375,4 +382,5 @@
  '(speedbar-use-images t)
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))))
  '(weblogger-config-alist (quote (("default" ("user" . "chopmo") ("server-url" . "http://chopmo.wordpress.com/xmlrpc.php") ("weblog" . "5186267"))))))
+
 
