@@ -1,0 +1,6 @@
+[submodule "yasnippets-rails"]
+	path = yasnippets-rails
+	url = git://github.com/eschulte/yasnippets-rails.git
+[submodule "yasnippets-shoulda"]
+	path = yasnippets-shoulda
+	url = git://github.com/rwc9u/yasnippets-shoulda.git

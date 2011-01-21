@@ -7,6 +7,7 @@
 ;;; Load ELPA
 ;;; =========
 (require 'package)
+(package-initialize)
 
 
 ;;; UTF-8 encoding
@@ -35,6 +36,10 @@
              (define-key ruby-mode-map "\e\C-n" nil)))
 
 
+(require 'rvm)
+(add-to-list 'load-path "~/.emacs.d/lib/rdebug")
+(require 'rdebug)
+
 ;;; Support for a few other formats
 ;;; ===============================
 (autoload 'haml-mode "haml-mode" "" t)
@@ -42,6 +47,18 @@
 
 (autoload 'yaml-mode "yaml-mode" "" t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+(require 'aes)
+(aes-enable-auto-decryption)
+
+(require 'epa-file)
+(epa-file-enable)
+
+; Rinari
+;; (add-to-list 'load-path "~/.emacs.d/lib/rinari")
+;; (require 'rinari)
+
+
 
 ;;; Rails support
 ;;; =============
@@ -145,7 +162,16 @@
 (global-set-key "A" 'apropos)
 (global-set-key (kbd "M-k") 'bury-buffer)
 (global-set-key (kbd "M-C-k") 'kill-current-buffer)
-(global-set-key (kbd "M-K") 'delete-window)
+(global-set-key (kbd "M-C-S-k") 'delete-window)
+
+; Use meta+shift+[j/k/l/i] to navigate between windows
+(global-set-key (kbd "M-L") 'windmove-right)
+(global-set-key (kbd "M-J") 'windmove-left)
+(global-set-key (kbd "M-I") 'windmove-up)
+(global-set-key (kbd "M-K") 'windmove-down)
+
+(global-set-key (kbd "M-C-g") 'egg-status)
+
 ;;; Faster point movement
 ;;; =====================
 (global-set-key "\M-\C-p"
@@ -249,7 +275,7 @@
 (setq-default tab-width 3)
 
 ; Remove menu bar
-(menu-bar-mode 0)
+; (menu-bar-mode 0) ; not needed on mac, it's there anyway
 
 ; Enable transient mark mode
 (transient-mark-mode 1)
@@ -271,7 +297,7 @@
 
 ;;; Server
 ;;; ======
-(server-start)
+; (server-start)
 
 ;;; Color theme
 ;;; ===========
@@ -294,15 +320,19 @@
 ;;; Load YAS
 ;;; ========
 (add-to-list 'load-path
-                  "~/.emacs.d/lib/yasnippet-0.6.1c")
-(require 'yasnippet) 
+                  "~/.emacs.d/yasnippet")
+(require 'yasnippet)
+(setq yas/prompt-functions '( yas/ido-prompt
+                              yas/completing-prompt))
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/lib/yasnippet-0.6.1c/snippets")
+(yas/load-directory "~/.emacs.d/yasnippet/snippets")
+(yas/load-directory "~/.emacs.d/yasnippets-rails/rails-snippets")
+;; said shoulda snippets
+(yas/load-directory "~/.emacs.d/yasnippets-shoulda")
 
 ;;; Start the server so we can use emacsclient from the command line
 ;;; ================================================================
 (server-start)
-
 
 ;;; A few orgmode tweaks
 ;;; ====================
@@ -370,6 +400,7 @@
  '(mumamo-chunk-coloring (quote no-chunks-colored))
  '(mumamo-set-major-mode-delay -1)
  '(ns-command-modifier (quote meta))
+ '(org-startup-folded (quote showeverything))
  '(p4-user-email "")
  '(python-indent 3)
  '(rails-tags-command "/opt/local/bin/ctags -e -a --Ruby-kinds=-f -o %s -R %s")
@@ -377,6 +408,7 @@
  '(rcirc-default-user-full-name "Jacob Poulsgaard Tjoernholm")
  '(rcirc-default-user-name "chopmo")
  '(rcirc-startup-channels-alist (quote (("^irc.freenode.net$" "#clojure"))))
+ '(remember-data-file "~/Dropbox/org/notes.org")
  '(ruby-electric-expand-delimiters-list nil)
  '(safe-local-variable-values (quote ((folded-file . t))))
  '(speedbar-use-images t)

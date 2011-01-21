@@ -1,2 +1,5 @@
 auto-save-list
 url
+*.elc
+abbrev_defs
+.org-id-locations
