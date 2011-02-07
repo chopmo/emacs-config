@@ -294,6 +294,9 @@
 
 (autoload 'linum-mode "linum" "Show line numbers" t)
 
+; Mac keys
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
 
 ;;; Server
 ;;; ======
@@ -394,12 +397,14 @@
  '(ido-enable-flex-matching t)
  '(ido-use-faces nil)
  '(inferior-lisp-program "sbcl")
+ '(js-indent-level 2)
  '(large-file-warning-threshold nil)
  '(mumamo-background-chunk-major (quote default))
  '(mumamo-background-chunk-submode (quote default))
  '(mumamo-chunk-coloring (quote no-chunks-colored))
  '(mumamo-set-major-mode-delay -1)
  '(ns-command-modifier (quote meta))
+ '(org-export-pdf-remove-logfiles t)
  '(org-startup-folded (quote showeverything))
  '(p4-user-email "")
  '(python-indent 3)
@@ -412,6 +417,7 @@
  '(ruby-electric-expand-delimiters-list nil)
  '(safe-local-variable-values (quote ((folded-file . t))))
  '(speedbar-use-images t)
+ '(tags-revert-without-query t)
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))))
  '(weblogger-config-alist (quote (("default" ("user" . "chopmo") ("server-url" . "http://chopmo.wordpress.com/xmlrpc.php") ("weblog" . "5186267"))))))
 
