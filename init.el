@@ -74,16 +74,23 @@
 ; This was not a very nice thing to enable globally!!
 ;; (remove-hook 'write-file-hooks 'untabify-before-write)
 
-;; (defun open-rails-project ()
-;;   (interactive)
-;;   (progn
-;;     (find-file "app/controllers/*.rb" t)
-;;     (find-file "app/helpers/*.rb" t)
-;;     (find-file "app/models/*.rb" t)
-;;     (find-file "config/database.yml" t)
-;;     (find-file "db/migrate/*.rb" t)
-;;     (find-file "test/*.rb" t)
-;;     (find-file "test/unit/*.rb" t)))
+
+(defun open-rails-project (root-dir)
+  (interactive "D")
+  (let ((paths '("app/models/*.rb"
+                 "app/controllers/*.rb"
+                 "app/helpers/*.rb"
+                 "app/mailers/*.rb"
+                 "app/views/*"
+                 "config/routes.rb"
+                 "config/database.yml"
+                 "db/schema.rb"
+                 "config/locales/*.yml"
+                 "spec/acceptance/*.rb" ; This may be a bit project-specific...
+                 "Gemfile"
+                )))
+    (dolist (p paths)
+      (find-file (concat root-dir p) t))))
 
 
 ;;; Visual aids
@@ -128,6 +135,7 @@
 
 (global-set-key "u" 'browse-url-at-point)
 (global-set-key "g" (quote ack))
+(global-set-key (kbd "M-s M-s") (lambda () (interactive) (save-some-buffers t)))
 
 ;; Leaving the rest commented out until I know if I'll miss them
 ;; Just playing with macros here...this could also be written:
@@ -298,11 +306,7 @@
 
 ; Mac keys
 (setq mac-command-modifier 'meta)
-(setq mac-option-modifier 'super)
-
-;;; Server
-;;; ======
-; (server-start)
+(setq mac-option-modifier 'meta)
 
 ;;; Color theme
 ;;; ===========
@@ -334,10 +338,6 @@
 (yas/load-directory "~/.emacs.d/yasnippets-rails/rails-snippets")
 ;; said shoulda snippets
 (yas/load-directory "~/.emacs.d/yasnippets-shoulda")
-
-;;; Start the server so we can use emacsclient from the command line
-;;; ================================================================
-(server-start)
 
 ;;; A few orgmode tweaks
 ;;; ====================
@@ -379,6 +379,7 @@
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.2)
  '(compilation-scroll-output t)
+ '(confirm-kill-emacs (quote yes-or-no-p))
  '(display-time-24hr-format t)
  '(eshell-buffer-name "*eshell*")
  '(eshell-output-filter-functions nil)
