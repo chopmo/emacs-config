@@ -135,8 +135,8 @@
 
 (add-hook 'rinari-minor-mode-hook
           '(lambda()
-             (local-set-key (kbd "C-M-'") 'rinari-insert-erb-skeleton)
-             (local-set-key (kbd "C-M-=") '(lambda () (interactive) (rinari-insert-erb-skeleton t)))))
+             (local-set-key (kbd "C-M-=") 'rinari-insert-erb-skeleton)
+             (local-set-key (kbd "C-M-'") '(lambda () (interactive) (rinari-insert-erb-skeleton t)))))
 
 (global-set-key "u" 'browse-url-at-point)
 (global-set-key "g" (quote ack))
