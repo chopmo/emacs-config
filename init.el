@@ -35,6 +35,14 @@
              (define-key ruby-mode-map "\e\C-p" nil)
              (define-key ruby-mode-map "\e\C-n" nil)))
 
+; Themes
+; (color-theme-late-night)
+; (color-theme-arjen)
+
+; (color-theme-charcoal-black)
+
+; (color-theme-vim-colors)
+
 
 (require 'rvm)
 (add-to-list 'load-path "~/.emacs.d/lib/rdebug")
@@ -77,7 +85,8 @@
 
 (defun open-rails-project (root-dir)
   (interactive "D")
-  (let ((paths '("app/models/*.rb"
+  (let ((root-dir (if (string-match "/$" root-dir) root-dir (concat root-dir "/")))
+        (paths '("app/models/*.rb"
                  "app/controllers/*.rb"
                  "app/helpers/*.rb"
                  "app/mailers/*.rb"
@@ -141,6 +150,7 @@
 (global-set-key "u" 'browse-url-at-point)
 (global-set-key "g" (quote ack))
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (save-some-buffers t)))
+(global-set-key (kbd "M-o M-r") 'open-rails-project)
 
 ;; Leaving the rest commented out until I know if I'll miss them
 ;; Just playing with macros here...this could also be written:
