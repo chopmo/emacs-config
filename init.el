@@ -42,6 +42,7 @@
 ; (color-theme-charcoal-black)
 
 ; (color-theme-vim-colors)
+; (color-theme-billw)
 
 
 (require 'rvm)
@@ -196,6 +197,7 @@
 (global-set-key (kbd "M-K") 'windmove-down)
 
 (global-set-key (kbd "M-C-g") 'egg-status)
+(global-set-key (kbd "M-r") 'revert-buffer)
 
 ;;; Faster point movement
 ;;; =====================
