@@ -197,7 +197,7 @@
 (global-set-key (kbd "M-K") 'windmove-down)
 
 (global-set-key (kbd "M-C-g") 'egg-status)
-(global-set-key (kbd "M-r") 'revert-buffer)
+(global-set-key (kbd "M-r") '(lambda () (interactive) (revert-buffer nil t)))
 
 ;;; Faster point movement
 ;;; =====================
