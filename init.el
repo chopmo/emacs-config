@@ -365,6 +365,11 @@
 ; Auto revert files
 (global-auto-revert-mode 1)
 
+
+; Coffee mode
+(add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
+(require 'coffee-mode)
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
