@@ -367,6 +367,14 @@
 
 
 ; Coffee mode
+(defun coffee-custom ()
+  "coffee-mode-hook"
+ (set (make-local-variable 'tab-width) 2))
+
+(add-hook 'coffee-mode-hook
+  '(lambda() (coffee-custom)))
+
+
 (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
 (require 'coffee-mode)
 
@@ -403,6 +411,7 @@
   ;; If there is more than one, they won't work right.
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.2)
+ '(coffee-tab-width 2)
  '(compilation-scroll-output t)
  '(confirm-kill-emacs (quote yes-or-no-p))
  '(display-time-24hr-format t)
