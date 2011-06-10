@@ -117,6 +117,18 @@
 (ad-activate 'move-beginning-of-line)
 
 
+; Enhance HAML mode to support creating tags without reaching for the
+; percent sign. Very simple. 
+(defun enhanced-space ()
+  (interactive)
+  (if (eq major-mode 'haml-mode)
+      (save-excursion
+        (backward-word)
+        (insert "%")))
+  (insert " "))
+(global-set-key (quote [33554464]) (quote enhanced-space))
+
+
 ;;; Remove toolbar and scrollbars if running in a GUI
 ;;; =================================================
 (if window-system
