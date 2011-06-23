@@ -44,15 +44,25 @@
 ; (color-theme-vim-colors)
 ; (color-theme-billw)
 
+(require 'color-theme-solarized)
+
+; Now choose color-theme-solarized-light
+; Now choose color-theme-solarized-dark
+
+; Scala support
+
 
 (require 'rvm)
 (add-to-list 'load-path "~/.emacs.d/lib/rdebug")
 (require 'rdebug)
+(load "js2.el")
 
 ;;; Support for a few other formats
 ;;; ===============================
-(autoload 'haml-mode "haml-mode" "" t)
+; (autoload 'haml-mode "haml-mode" "" t)
 (autoload 'sass-mode "sass-mode" "" t)
+
+(require 'haml-mode)
 
 (autoload 'yaml-mode "yaml-mode" "" t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
@@ -64,6 +74,7 @@
 (epa-file-enable)
 
 (load "ido-init.el")
+(load "init-scala.el")
 
 ; Rinari
 ;; (add-to-list 'load-path "~/.emacs.d/lib/rinari")
@@ -119,14 +130,15 @@
 
 ; Enhance HAML mode to support creating tags without reaching for the
 ; percent sign. Very simple. 
-(defun enhanced-space ()
-  (interactive)
-  (if (eq major-mode 'haml-mode)
-      (save-excursion
-        (backward-word)
-        (insert "%")))
-  (insert " "))
-(global-set-key (quote [33554464]) (quote enhanced-space))
+;; (defun enhanced-space ()
+;;   (interactive)
+;;   (if (eq major-mode 'haml-mode)
+;;       (save-excursion
+;;         (backward-word)
+;;         (insert "%")))
+;;   (insert " "))
+;; (global-set-key (quote [33554464]) (quote enhanced-space))
+
 
 
 ;;; Remove toolbar and scrollbars if running in a GUI
@@ -390,6 +402,7 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
 (require 'coffee-mode)
 
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -412,6 +425,7 @@
  '(p4-diff-file-face ((t nil)))
  '(p4-diff-head-face ((t nil)))
  '(p4-diff-ins-face ((t (:foreground "lightblue"))))
+ '(persp-selected-face ((t (:foreground "yellow" :weight bold))))
  '(rcirc-server ((((class color) (min-colors 88) (background dark)) (:foreground "gray50"))))
  '(region ((t (:background "DarkOliveGreen"))))
  '(trailing-whitespace ((((class color) (background dark)) nil))))
@@ -421,6 +435,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(Buffer-menu-buffer+size-width 46)
  '(blink-cursor-delay 0.0)
  '(blink-cursor-interval 0.2)
  '(coffee-tab-width 2)
@@ -448,6 +463,8 @@
  '(inferior-lisp-program "sbcl")
  '(js-indent-level 2)
  '(large-file-warning-threshold nil)
+ '(max-lisp-eval-depth 1500)
+ '(max-specpdl-size 12040)
  '(mumamo-background-chunk-major (quote default))
  '(mumamo-background-chunk-submode (quote default))
  '(mumamo-chunk-coloring (quote no-chunks-colored))
