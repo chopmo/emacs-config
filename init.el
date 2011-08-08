@@ -44,7 +44,6 @@
 ; (color-theme-vim-colors)
 ; (color-theme-billw)
 
-(require 'color-theme-solarized)
 
 ; Now choose color-theme-solarized-light
 ; Now choose color-theme-solarized-dark
@@ -55,7 +54,9 @@
 (require 'rvm)
 (add-to-list 'load-path "~/.emacs.d/lib/rdebug")
 (require 'rdebug)
-(load "js2.el")
+; (load "js2.el")
+
+; (require 'sunrise-commander)
 
 ;;; Support for a few other formats
 ;;; ===============================
@@ -176,6 +177,8 @@
 (global-set-key "g" (quote ack))
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (save-some-buffers t)))
 (global-set-key (kbd "M-o M-r") 'open-rails-project)
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Leaving the rest commented out until I know if I'll miss them
 ;; Just playing with macros here...this could also be written:
@@ -352,8 +355,11 @@
 ;;; Color theme
 ;;; ===========
 (require 'color-theme)
+(require 'color-theme-solarized)
 (color-theme-initialize)
 (color-theme-dark-laptop)
+; (color-theme-solarized-light)
+
 
 
 ;;; Git integration
@@ -402,6 +408,7 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
 (require 'coffee-mode)
 
+; perspective next/prev on M-C-S-n/p
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
