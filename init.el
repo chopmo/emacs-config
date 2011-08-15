@@ -2,7 +2,8 @@
 ;;; =========
 (setq load-path (append (list "~/.emacs.d"
                               "~/.emacs.d/lib"
-                              "~/.emacs.d/color-theme-6.6.0") load-path))
+                              "~/.emacs.d/color-theme-6.6.0"
+                              "~/.emacs.d/lib/twittering-mode-2.0.0") load-path))
 
 ;;; Load ELPA
 ;;; =========
@@ -45,10 +46,17 @@
 ; (color-theme-billw)
 
 
+(require 'twittering-mode)
+(load "twitter-filter.el")
+(setq twittering-icon-mode t)
+
 ; Now choose color-theme-solarized-light
 ; Now choose color-theme-solarized-dark
 
 ; Scala support
+(add-hook 'scala-mode-hook
+          (lambda ()
+            (setq imenu-create-index-function 'scala-imenu-create-index)))
 
 
 (require 'rvm)
@@ -298,8 +306,8 @@
 
 (setq
  ido-max-prospects 6
- ido-confirm-unique-completion t)
-
+ ido-confirm-unique-completion t
+ ido-max-directory-size 100000)
 ;;; Misc customizations
 ;;; ===================
 (setq dabbrev-case-fold-search nil)
@@ -393,7 +401,8 @@
 
 
 ; Auto revert files
-(global-auto-revert-mode 1)
+(setf global-auto-revert-non-file-buffers t)
+(global-auto-revert-mode t)
 
 
 ; Coffee mode
