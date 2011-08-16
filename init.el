@@ -48,7 +48,12 @@
 
 (require 'twittering-mode)
 (load "twitter-filter.el")
-(setq twittering-icon-mode t)
+(setq twittering-icon-mode nil)
+(setq twittering-timer-interval 300)         ; Update your timeline each 300 seconds (5 minutes)
+(setq twittering-url-show-status nil)        ; Keeps the echo area from showing all the http processes
+(setq twittering-use-master-password t)
+(setq twittering-number-of-tweets-on-retrieval 50)
+(setq twittering-status-format "%i %s,  %@:\n%FILL[  ]{%T %R}\n ")
 
 ; Now choose color-theme-solarized-light
 ; Now choose color-theme-solarized-dark
