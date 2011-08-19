@@ -189,6 +189,7 @@
 (global-set-key "u" 'browse-url-at-point)
 (global-set-key "g" (quote ack))
 (global-set-key (kbd "M-s M-s") (lambda () (interactive) (save-some-buffers t)))
+(global-set-key (kbd "M-s M-h") 'shell)
 (global-set-key (kbd "M-o M-r") 'open-rails-project)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)

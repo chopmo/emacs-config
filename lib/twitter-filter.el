@@ -1,12 +1,13 @@
 ; From: http://www.emacswiki.org/emacs/TwitteringMode
 
-(setq twittering-tweet-filters '("bacon" "beef" "That is all"))
+(setq twittering-tweet-filters '("bacon" "beef" "that is all" "lunch"))
+
 (defun twittering-filter-tweets ()
   (setq non-matching-statuses '())
   (dolist (status twittering-new-tweets-statuses)
     (setq matched-tweets 0)
     (dolist (pat twittering-tweet-filters)
-      (if (string-match pat (cdr (assoc 'text status)))
+      (if (string-match pat (downcase (cdr (assoc 'text status))))
           (setq matched-tweets (+ 1 matched-tweets))))
     (if (= 0 matched-tweets)
         (setq non-matching-statuses (append non-matching-statuses `(,status)))))
