@@ -10,6 +10,10 @@
 (require 'package)
 (package-initialize)
 
+(require 'scss-mode)
+
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 
 ;;; UTF-8 encoding
 ;;; ==============
@@ -89,6 +93,7 @@
 
 (load "ido-init.el")
 (load "init-scala.el")
+(load "dired-init.el")
 
 ; Rinari
 ;; (add-to-list 'load-path "~/.emacs.d/lib/rinari")
@@ -240,6 +245,7 @@
 (global-set-key (kbd "M-C-g") 'egg-status)
 (global-set-key (kbd "M-r") '(lambda () (interactive) (revert-buffer nil t)))
 
+(global-set-key (kbd "C-M-O") 'dired-open)
 ;;; Faster point movement
 ;;; =====================
 (global-set-key "\M-\C-p"
@@ -424,6 +430,8 @@
 (require 'coffee-mode)
 
 ; perspective next/prev on M-C-S-n/p
+(persp-mode 1)
+(global-set-key (kbd "M-C-S-p") 'persp-switch)
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -447,7 +455,7 @@
  '(p4-diff-file-face ((t nil)))
  '(p4-diff-head-face ((t nil)))
  '(p4-diff-ins-face ((t (:foreground "lightblue"))))
- '(persp-selected-face ((t (:foreground "yellow" :weight bold))))
+ '(persp-selected-face ((t (:foreground "red" :weight bold))))
  '(rcirc-server ((((class color) (min-colors 88) (background dark)) (:foreground "gray50"))))
  '(region ((t (:background "DarkOliveGreen"))))
  '(trailing-whitespace ((((class color) (background dark)) nil))))
@@ -532,6 +540,8 @@
  '(remember-data-file "~/Dropbox/org/notes.org")
  '(ruby-electric-expand-delimiters-list nil)
  '(safe-local-variable-values (quote ((folded-file . t))))
+ '(scss-compile-at-save nil)
+ '(scss-sass-command "/usr/bin/sass")
  '(speedbar-use-images t)
  '(tags-revert-without-query t)
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))))

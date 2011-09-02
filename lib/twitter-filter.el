@@ -1,6 +1,6 @@
 ; From: http://www.emacswiki.org/emacs/TwitteringMode
 
-(setq twittering-tweet-filters '("bacon" "beef" "that is all" "lunch"))
+(setq twittering-tweet-filters '("bacon" "beef" "that is all" "lunch" "foursquare"))
 
 (defun twittering-filter-tweets ()
   (setq non-matching-statuses '())
