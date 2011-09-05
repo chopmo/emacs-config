@@ -95,6 +95,8 @@
 (load "init-scala.el")
 (load "dired-init.el")
 
+(load "init-org.el")
+
 ; Rinari
 ;; (add-to-list 'load-path "~/.emacs.d/lib/rinari")
 ;; (require 'rinari)
