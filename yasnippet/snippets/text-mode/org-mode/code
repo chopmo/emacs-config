@@ -1,0 +1,8 @@
+#contributor : Chopmo
+#name : Code snippet in beamer presentation
+# --
+#+BEGIN_LaTeX
+\begin{lstlisting}[language=${1:language},tabsize=2,frame=none]
+$0
+\end{lstlisting}
+#+END_LaTeX

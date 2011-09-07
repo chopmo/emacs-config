@@ -5,6 +5,9 @@
                               "~/.emacs.d/color-theme-6.6.0"
                               "~/.emacs.d/lib/twittering-mode-2.0.0") load-path))
 
+(require 'org-install)
+(require 'org-latex)
+
 ;;; Load ELPA
 ;;; =========
 (require 'package)
@@ -12,7 +15,7 @@
 
 (require 'scss-mode)
 
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 
 ;;; UTF-8 encoding
@@ -95,7 +98,7 @@
 (load "init-scala.el")
 (load "dired-init.el")
 
-(load "init-org.el")
+; (load "init-org.el")
 
 ; Rinari
 ;; (add-to-list 'load-path "~/.emacs.d/lib/rinari")
@@ -502,34 +505,6 @@
  '(mumamo-chunk-coloring (quote no-chunks-colored))
  '(mumamo-set-major-mode-delay -1)
  '(ns-command-modifier (quote meta))
- '(org-export-latex-classes (quote (("article" "\\documentclass[11pt]{article}
-\\usepackage[utf8]{inputenc}
-\\usepackage[T1]{fontenc}
-\\usepackage{graphicx}
-\\usepackage{longtable}
-\\usepackage{float}
-\\usepackage{wrapfig}
-\\usepackage{soul}
-\\usepackage{amssymb}
-\\usepackage{hyperref}" ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}") ("\\paragraph{%s}" . "\\paragraph*{%s}") ("\\subparagraph{%s}" . "\\subparagraph*{%s}")) ("report" "\\documentclass[11pt]{report}
-\\usepackage[utf8]{inputenc}
-\\usepackage[T1]{fontenc}
-\\usepackage{graphicx}
-\\usepackage{longtable}
-\\usepackage{float}
-\\usepackage{wrapfig}
-\\usepackage{soul}
-\\usepackage{amssymb}
-\\usepackage{hyperref}" ("\\part{%s}" . "\\part*{%s}") ("\\chapter{%s}" . "\\chapter*{%s}") ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}")) ("book" "\\documentclass[11pt]{book}
-\\usepackage[utf8]{inputenc}
-\\usepackage[T1]{fontenc}
-\\usepackage{graphicx}
-\\usepackage{longtable}
-\\usepackage{float}
-\\usepackage{wrapfig}
-\\usepackage{soul}
-\\usepackage{amssymb}
-\\usepackage{hyperref}" ("\\part{%s}" . "\\part*{%s}") ("\\chapter{%s}" . "\\chapter*{%s}") ("\\section{%s}" . "\\section*{%s}") ("\\subsection{%s}" . "\\subsection*{%s}") ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))))
  '(org-export-pdf-remove-logfiles t)
  '(org-startup-folded (quote showeverything))
  '(p4-user-email "")
