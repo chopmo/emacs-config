@@ -273,6 +273,7 @@
 (defalias 'tmopen (lambda () (interactive)
   (eshell-command (concat "mate " buffer-file-name))))
 
+
 (defalias 'pydebug (lambda () (interactive)
   (insert "import pdb; pdb.set_trace() # __PYDEBUG__")
   (save-buffer)))
@@ -280,6 +281,13 @@
 (defalias 'rbdebug (lambda () (interactive)
   (insert "require 'ruby-debug'; debugger # __RBDEBUG__")
   (save-buffer)))
+
+(defun touch ()
+  (interactive)
+  (eshell-command (concat "touch " buffer-file-name)))
+
+(global-set-key (kbd "M-C-t") 'touch)
+
 
 ;;; Load and customize Ido
 ;;; ======================
