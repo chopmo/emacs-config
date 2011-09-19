@@ -5,6 +5,7 @@
                               "~/.emacs.d/color-theme-6.6.0"
                               "~/.emacs.d/lib/twittering-mode-2.0.0") load-path))
 
+(load "env")
 (require 'org-install)
 (require 'org-latex)
 
@@ -74,6 +75,10 @@
 (require 'rvm)
 (add-to-list 'load-path "~/.emacs.d/lib/rdebug")
 (require 'rdebug)
+
+(require 'yari)
+(global-set-key (kbd "M-C-y") 'yari)
+
 ; (load "js2.el")
 
 ; (require 'sunrise-commander)
@@ -203,6 +208,9 @@
 (global-set-key (kbd "M-o M-r") 'open-rails-project)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(global-set-key (kbd "C-M-j") 'previous-buffer)
+(global-set-key (kbd "C-M-l") 'next-buffer)
 
 ;; Leaving the rest commented out until I know if I'll miss them
 ;; Just playing with macros here...this could also be written:
@@ -530,6 +538,7 @@
  '(speedbar-use-images t)
  '(tags-revert-without-query t)
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))))
- '(weblogger-config-alist (quote (("default" ("user" . "chopmo") ("server-url" . "http://chopmo.wordpress.com/xmlrpc.php") ("weblog" . "5186267"))))))
+ '(weblogger-config-alist (quote (("default" ("user" . "chopmo") ("server-url" . "http://chopmo.wordpress.com/xmlrpc.php") ("weblog" . "5186267")))))
+ '(yari-ri-program-name "ri"))
 
 
