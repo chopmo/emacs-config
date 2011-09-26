@@ -8,6 +8,7 @@
 (load "env")
 (require 'org-install)
 (require 'org-latex)
+(require 'pivotal-tracker)
 
 ;;; Load ELPA
 ;;; =========
@@ -43,6 +44,8 @@
              ;; Undo ruby-mode overwrite of my prev/next 5 lines shortcuts
              (define-key ruby-mode-map "\e\C-p" nil)
              (define-key ruby-mode-map "\e\C-n" nil)))
+
+
 
 ; Themes
 ; (color-theme-late-night)
@@ -450,6 +453,7 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
 (require 'coffee-mode)
 
+
 ; perspective next/prev on M-C-S-n/p
 (persp-mode 1)
 (global-set-key (kbd "M-C-S-p") 'persp-switch)
@@ -524,6 +528,7 @@
  '(org-export-pdf-remove-logfiles t)
  '(org-startup-folded (quote showeverything))
  '(p4-user-email "")
+ '(pivotal-api-token "d51db1d51c1eda993f2988061185f3b6")
  '(python-indent 3)
  '(rails-tags-command "/opt/local/bin/ctags -e -a --Ruby-kinds=-f -o %s -R %s")
  '(rcirc-default-nick "chopmo")
@@ -538,7 +543,8 @@
  '(speedbar-use-images t)
  '(tags-revert-without-query t)
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))))
- '(weblogger-config-alist (quote (("default" ("user" . "chopmo") ("server-url" . "http://chopmo.wordpress.com/xmlrpc.php") ("weblog" . "5186267")))))
+ '(weblogger-config-alist (quote (("chopmo" "http://chopmo.wordpress.com/xmlrpc.php" "chopmo" "" "5186267") ("default" ("user" . "chopmo") ("server-url" . "http://chopmo.wordpress.com/xmlrpc.php") ("weblog" . "5186267")))))
+ '(weblogger-server-password "")
  '(yari-ri-program-name "ri"))
 
 
