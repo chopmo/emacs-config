@@ -2,18 +2,12 @@
 ;;; =========
 (setq load-path (append (list "~/.emacs.d"
                               "~/.emacs.d/lib"
-                              "~/.emacs.d/org2blog"
                               "~/.emacs.d/lib/twittering-mode-2.0.0") load-path))
 
 (load "env")
-
 (require 'org-install)
 (require 'org-latex)
-
-; 
-
 (require 'pivotal-tracker)
-(require 'autopair)
 
 ;;; Load ELPA
 ;;; =========
@@ -51,8 +45,16 @@
              (define-key ruby-mode-map "\e\C-n" nil)))
 
 
-(require 'color-theme-ir-black)
-(color-theme-ir-black)
+
+; Themes
+; (color-theme-late-night)
+; (color-theme-arjen)
+
+; (color-theme-charcoal-black)
+
+; (color-theme-vim-colors)
+; (color-theme-billw)
+
 
 (require 'twittering-mode)
 (load "twitter-filter.el")
@@ -255,7 +257,7 @@
 (global-set-key (kbd "M-I") 'windmove-up)
 (global-set-key (kbd "M-K") 'windmove-down)
 
-(global-set-key (kbd "M-C-g") 'magit-status)
+(global-set-key (kbd "M-C-g") 'egg-status)
 (global-set-key (kbd "M-r") '(lambda () (interactive) (revert-buffer nil t)))
 
 (global-set-key (kbd "C-M-O") 'dired-open)
@@ -395,17 +397,17 @@
 
 ;;; Color theme
 ;;; ===========
-; (require 'color-theme)
-; (require 'color-theme-solarized)
-; (color-theme-initialize)
-; (color-theme-dark-laptop)
+(require 'color-theme)
+(require 'color-theme-solarized)
+(color-theme-initialize)
+(color-theme-dark-laptop)
 ; (color-theme-solarized-light)
 
 
 
 ;;; Git integration
 ;;; ===============
-; (require 'egg)
+(require 'egg)
 
 ;;; Load local customizations for this machine
 ;;; ==========================================
@@ -450,23 +452,10 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
 (require 'coffee-mode)
 
-; (require 'org2blog)
-
-;; (setq blog (netrc-machine (netrc-parse "~/.netrc") "wordpress" t))
-
-;; (setq org2blog/wp-blog-alist
-;;       '(("wordpress"
-;;          :url "http://emacstips.org/wordpress/xmlrpc.php"
-;;          :username (netrc-get blog "login")
-;;          :password (netrc-get blog "password"))))
-
-
-(setq org2blog/wp-confirm-post t)
-(setq org2blog/wp-use-sourcecode-shortcode t)
 
 ; perspective next/prev on M-C-S-n/p
-; (persp-mode 1)
-; (global-set-key (kbd "M-C-S-p") 'persp-switch)
+(persp-mode 1)
+(global-set-key (kbd "M-C-S-p") 'persp-switch)
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
