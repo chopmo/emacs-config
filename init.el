@@ -11,6 +11,9 @@
 (require 'org-latex)
 
 (require 'rspec-mode)
+(global-set-key '[f7] 'rspec-verify)
+(global-set-key (kbd "C-M-S-r") '(lambda () (interactive) (call-interactively (key-binding "\C-c,r"))))
+
 
 (require 'pivotal-tracker)
 (require 'autopair)
