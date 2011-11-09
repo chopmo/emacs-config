@@ -10,7 +10,7 @@
 (require 'org-install)
 (require 'org-latex)
 
-; 
+(require 'rspec-mode)
 
 (require 'pivotal-tracker)
 (require 'autopair)
@@ -81,7 +81,7 @@
 
 ; (load "js2.el")
 
-; (require 'sunrise-commander)
+(require 'sunrise-commander)
 
 ;;; Support for a few other formats
 ;;; ===============================
@@ -109,6 +109,14 @@
 ;; (add-to-list 'load-path "~/.emacs.d/lib/rinari")
 ;; (require 'rinari)
 
+; (require 'find-file-in-project)
+(setq ffip-patterns '("*.html" "*.org" "*.txt" "*.md" "*.el" "*.clj" "*.py" "*.rb" "*.js" "*.pl"
+    "*.sh" "*.erl" "*.hs" "*.ml" "*.haml"))
+
+(global-set-key (kbd "M-C-S-p") 'find-file-in-project)
+
+(global-set-key '[S-f7] 'compile)
+(global-set-key '[F7] 'recompile)
 
 
 ;;; Rails support
@@ -296,7 +304,14 @@
 
 (global-set-key (kbd "M-C-t") 'touch)
 
-
+(defun three-up ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (split-window-horizontally)
+  (balance-windows)
+  (windmove-right))
+  
 ;;; Load and customize Ido
 ;;; ======================
 (require 'ido)
@@ -465,8 +480,9 @@
 (setq org2blog/wp-use-sourcecode-shortcode t)
 
 ; perspective next/prev on M-C-S-n/p
-; (persp-mode 1)
-; (global-set-key (kbd "M-C-S-p") 'persp-switch)
+;; (require 'perspective)
+;; (persp-mode 1)
+;; (global-set-key (kbd "M-C-S-l") 'persp-switch)
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -481,6 +497,7 @@
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange1"))))
  '(italic ((((supports :underline t)) (:underline "gray"))))
  '(link ((((class color) (min-colors 88) (background dark)) (:foreground "cyan1"))))
+ '(magit-item-highlight ((((class color) (background dark)) (:background "#112"))))
  '(mode-line-inactive ((t (:background "black" :foreground "wheat"))))
  '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil)))
  '(mumamo-background-chunk-submode ((((class color) (min-colors 88) (background dark)) nil)))
@@ -546,6 +563,9 @@
  '(rcirc-default-user-name "chopmo")
  '(rcirc-startup-channels-alist (quote (("^irc.freenode.net$" "#clojure"))))
  '(remember-data-file "~/Dropbox/org/notes.org")
+ '(rspec-spec-command "rspec")
+ '(rspec-use-bundler-when-possible nil)
+ '(rspec-use-rake-flag nil)
  '(ruby-electric-expand-delimiters-list nil)
  '(safe-local-variable-values (quote ((folded-file . t))))
  '(scss-compile-at-save nil)

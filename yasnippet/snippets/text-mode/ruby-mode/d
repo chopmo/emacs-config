@@ -1,0 +1,6 @@
+#name : Define method
+#group : definitions
+# --
+def $1
+  $0
+end
