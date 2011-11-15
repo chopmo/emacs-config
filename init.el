@@ -116,11 +116,14 @@
 (setq ffip-patterns '("*.html" "*.org" "*.txt" "*.md" "*.el" "*.clj" "*.py" "*.rb" "*.js" "*.pl"
     "*.sh" "*.erl" "*.hs" "*.ml" "*.haml"))
 
+(setq ffip-limit 2000)
+
 (global-set-key (kbd "M-C-S-p") 'find-file-in-project)
 
 (global-set-key '[S-f7] 'compile)
 (global-set-key '[F7] 'recompile)
 
+(global-set-key (kbd "C-M-]") '(lambda () (interactive) (indent-region 0 (point-max))))
 
 ;;; Rails support
 ;;; =============
@@ -468,6 +471,10 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
 (require 'coffee-mode)
 
+
+(setq send-mail-function 'mailclient-send-it)
+(setq message-send-mail-function 'message-send-mail-with-mailclient)
+
 ; (require 'org2blog)
 
 ;; (setq blog (netrc-machine (netrc-parse "~/.netrc") "wordpress" t))
@@ -579,5 +586,6 @@
  '(weblogger-config-alist (quote (("chopmo" "http://chopmo.wordpress.com/xmlrpc.php" "chopmo" "" "5186267") ("default" ("user" . "chopmo") ("server-url" . "http://chopmo.wordpress.com/xmlrpc.php") ("weblog" . "5186267")))))
  '(weblogger-server-password "")
  '(yari-ri-program-name "ri"))
+
 
 
