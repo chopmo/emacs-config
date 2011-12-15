@@ -49,9 +49,10 @@
 (add-hook 'ruby-mode-hook
           '(lambda ()
              ;(inf-ruby-keys)
-             ;; Undo ruby-mode overwrite of my prev/next 5 lines shortcuts
+             ;; Undo ruby-mode shortcut overwrites
              (define-key ruby-mode-map "\e\C-p" nil)
-             (define-key ruby-mode-map "\e\C-n" nil)))
+             (define-key ruby-mode-map "\e\C-n" nil)
+             (define-key ruby-mode-map (kbd "M-C-h") nil)))
 
 
 (require 'color-theme-ir-black)
@@ -317,6 +318,11 @@
   (split-window-horizontally)
   (balance-windows)
   (windmove-right))
+
+(global-set-key (kbd "M-C-0") 'delete-window)
+(global-set-key (kbd "M-C-1") 'delete-other-windows)
+(global-set-key (kbd "M-C-2") 'split-window-vertically)
+(global-set-key (kbd "M-C-3") 'split-window-horizontally)
   
 ;;; Load and customize Ido
 ;;; ======================
@@ -434,6 +440,10 @@
   (if (file-exists-p local-config-filename)
     (load local-config-filename)))
 
+;; (defun html2haml ()
+;;   (interactive)
+;;   (dired-do-shell-command "html2haml ? `echo ? | sed 's/erb/haml/'`")
+;;   (dired-do-redisplay))
 
 ;;; Load YAS
 ;;; ========
@@ -475,15 +485,21 @@
 (setq send-mail-function 'mailclient-send-it)
 (setq message-send-mail-function 'message-send-mail-with-mailclient)
 
-; (require 'org2blog)
+(require 'org2blog)
+(require 'netrc)
 
-;; (setq blog (netrc-machine (netrc-parse "~/.netrc") "wordpress" t))
+(setq blog (netrc-machine (netrc-parse "~/.netrc") "wordpress" t))
+(setq fullofstars-blog (netrc-machine (netrc-parse "~/.netrc") "fullofstars" t))
 
-;; (setq org2blog/wp-blog-alist
-;;       '(("wordpress"
-;;          :url "http://emacstips.org/wordpress/xmlrpc.php"
-;;          :username (netrc-get blog "login")
-;;          :password (netrc-get blog "password"))))
+(setq org2blog/wp-blog-alist
+      '(("wordpress"
+         :url "http://chopmode.wordpress.com/xmlrpc.php"
+         :username (netrc-get blog "login")
+         :password (netrc-get blog "password"))
+        ("fullofstars"
+         :url "http://fullofstars.chopmo.dk/xmlrpc.php"
+         :username (netrc-get fullofstars-blog "login")
+         :password (netrc-get fullofstars-blog "password"))))
 
 
 (setq org2blog/wp-confirm-post t)
@@ -494,7 +510,7 @@
 
 
 ; perspective next/prev on M-C-S-n/p
-;; (require 'perspective)
-;; (persp-mode 1)
-;; (global-set-key (kbd "M-C-S-l") 'persp-switch)
+(require 'perspective)
+(persp-mode 1)
+(global-set-key (kbd "M-C-S-l") 'persp-switch)
 
