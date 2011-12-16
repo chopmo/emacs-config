@@ -10,6 +10,8 @@
 (require 'org-install)
 (require 'org-latex)
 
+(require 'thrift-mode)
+
 (require 'rspec-mode)
 (global-set-key '[f7] 'rspec-verify)
 (global-set-key (kbd "C-M-S-r") '(lambda () (interactive) (call-interactively (key-binding "\C-c,r"))))
