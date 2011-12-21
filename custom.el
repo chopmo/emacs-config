@@ -77,7 +77,7 @@
  '(rcirc-default-user-name "chopmo")
  '(rcirc-startup-channels-alist (quote (("^irc.freenode.net$" "#clojure"))))
  '(remember-data-file "~/Dropbox/org/notes.org")
- '(rspec-spec-command "rspec")
+ '(rspec-spec-command "~/.rbenv/shims/rspec")
  '(rspec-use-bundler-when-possible nil)
  '(rspec-use-rake-flag nil)
  '(ruby-electric-expand-delimiters-list nil)
