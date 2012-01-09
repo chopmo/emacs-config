@@ -516,3 +516,92 @@
 (persp-mode 1)
 (global-set-key (kbd "M-C-S-l") 'persp-switch)
 
+
+; GRB: cycle through selective-display levels
+(setq selective-display-level 0)
+(setq selective-display-increment 2)
+(setq max-selective-display-level 8)
+
+(defun jpt-print-selective-display-level ()
+  (interactive)
+  (message ( "Selective display level: " selective-display-level)))
+
+(defun next-selective-display ()
+  "Switch to the next selective display level"
+  (interactive)
+  (if (< selective-display-level max-selective-display-level)
+      (setq selective-display-level
+            (+ selective-display-increment
+               selective-display-level))
+
+    (set-selective-display selective-display-level)
+    (jpt-print-selective-display-level)))
+
+(global-set-key (quote [M-right]) 'next-selective-display)
+
+(defun next-selective-display ()
+  "Switch to the next selective display level"
+  (if (>= selective-display-level max-selective-display-level)
+      (setq selective-display-level 0)
+    (setq selective-display-level
+          (+ selective-display-increment
+             selective-display-level)))
+  (interactive)
+  (set-selective-display selective-display-level))
+(global-set-key "\M-c" 'switch-selective-display)
+
+
+(defun jpt-setup-windows ()
+  (interactive)
+  (switch-to-buffer "*scratch*")
+  (delete-other-windows)
+  (split-window-horizontally)
+  (split-window-horizontally)
+  (balance-windows)
+  ; (shell)
+  (other-window 2)
+  (split-window)
+  (other-window -1)
+  (setq grb-temporary-window (nth 1 (window-list)))
+  (setq jpt-magit-window (nth 2 (window-list))))
+
+(setq special-display-regexps
+ '("^\\*Completions\\*$"
+   "^\\*Ido Completions\\*$"
+   "^\\*magit"
+   "^\\*ack\\*$"
+   "^\\*Help\\*$"
+   "^\\*grep\\*$"
+   "^\\*Apropos\\*$"
+   "^\\*elisp macroexpansion\\*$"
+   "^\\*local variables\\*$"
+   "^\\*Compile-Log\\*$"
+   "^\\*Quail Completions\\*$"
+   "^\\*Occur\\*$"
+   "^\\*frequencies\\*$"
+   "^\\*compilation\\*$"
+   "^\\*Locate\\*$"
+   "^\\*Colors\\*$"
+   "^\\*tumme-display-image\\*$"
+   "^\\*SLIME Description\\*$"
+   "^\\*.* output\\*$"                  ; tex compilation buffer
+   "^\\*TeX Help\\*$"
+   "^\\*Shell Command Output\\*$"
+   "^\\*Async Shell Command\\*$"
+   "^\\*Backtrace\\*$"))
+
+
+(defun jpt-window-for-buffer (buffer)
+  (if (string-match "\\*magit" (buffer-name buffer))
+      jpt-magit-window
+    grb-temporary-window))
+
+(defun grb-special-display (buffer &optional data)
+  (let ((window (jpt-window-for-buffer buffer)))
+    (with-selected-window window
+      (switch-to-buffer buffer)
+      window)))
+
+(setq special-display-function #'grb-special-display)
+
+(jpt-setup-windows)

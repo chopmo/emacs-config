@@ -6,7 +6,7 @@
 
 ;; Author: Nathan Weizenbaum
 ;; URL: http://github.com/nex3/perspective-el
-;; Version: 1.6
+;; Version: 1.7
 ;; Created: 2008-03-05
 ;; By: Nathan Weizenbaum
 ;; Keywords: workspace, convenience, frames
@@ -170,6 +170,10 @@ perspective-local values."))
 If the value is 'header, `persp-modestring' is shown in the
 header line instead.")
 
+(defvar persp-protected nil
+  "Whether a perspective error should cause persp-mode to be disabled.
+Dynamically bound by `persp-protect'.")
+
 (defface persp-selected-face
   '((t (:weight bold :foreground "Blue")))
   "The face used to highlight the current perspective on the modeline.")
@@ -178,19 +182,28 @@ header line instead.")
   "Wrap BODY to disable persp-mode when it errors out.
 This prevents the persp-mode from completely breaking Emacs."
   (declare (indent 0))
-  `(condition-case err
-       (progn ,@body)
-     ((debug error)
-      (message "Error initializing persp-mode: %S" err)
-      (persp-mode -1))))
+  (let ((persp-protected t))
+    `(condition-case err
+         (progn ,@body)
+       (persp-error
+        (message "Fatal persp-mode error: %S" err)
+        (persp-mode -1)))))
+
+(defun persp-error (&rest args)
+  "Like `error', but marks it as a persp-specific error.
+Used along with `persp-protect' to ensure that persp-mode doesn't
+bring down Emacs."
+  (if persp-protected
+      (signal 'persp-error (list (apply 'format args)))
+    (apply 'error args)))
 
 (defun check-persp (persp)
   "Raise an error if PERSP has been killed."
   (cond
    ((not persp)
-    (error "Expected perspective, was nil"))
+    (persp-error "Expected perspective, was nil"))
    ((persp-killed-p persp)
-    (error "Using killed perspective `%s'" (persp-name persp)))))
+    (persp-error "Using killed perspective `%s'" (persp-name persp)))))
 
 (defmacro make-persp (&rest args)
   "Create a new perspective struct and put it in `perspectives-hash'.
@@ -263,12 +276,14 @@ REQUIRE-MATCH can take the same values as in `completing-read'."
   (declare (indent 1))
   (let ((old (gensym)))
     `(progn
-       (let ((,old (when persp-curr (persp-name persp-curr))))
+       (let ((,old (when persp-curr (persp-name persp-curr)))
+             (last-persp-cache persp-last))
          (unwind-protect
              (progn
                (persp-switch ,name)
                ,@body)
-           (when ,old (persp-switch ,old)))))))
+           (when ,old (persp-switch ,old)))
+         (setq persp-last last-persp-cache)))))
 
 (defun persp-new (name)
   "Return a new perspective with name NAME.
@@ -397,7 +412,7 @@ See `persp-switch', `persp-get-quick'."
                  (persp-get-quick char))))
     (setq this-command (cons this-command persp))
     (if persp (persp-switch persp)
-      (error (concat "No perspective name begins with " (string char))))))
+      (persp-error (concat "No perspective name begins with " (string char))))))
 
 (defun persp-find-some ()
   "Return the name of a valid perspective.
@@ -484,7 +499,7 @@ perspective and no others are killed."
   "Rename the current perspective to NAME."
   (interactive "sNew name: ")
   (if (gethash name perspectives-hash)
-      (error "Perspective `%s' already exists" name)
+      (persp-error "Perspective `%s' already exists" name)
     (remhash (persp-name persp-curr) perspectives-hash)
     (puthash name persp-curr perspectives-hash)
     (setf (persp-name persp-curr) name)
@@ -553,9 +568,11 @@ is non-nil or with prefix arg, don't switch to the new perspective."
   (let ((buffers (persp-all-get name (selected-frame)))
         persp)
     (if (null buffers)
-        (error "Perspective `%s' doesn't exist in another frame" name))
+        (persp-error "Perspective `%s' doesn't exist in another frame" name))
     (setq persp (make-persp :name name :buffers buffers
-                  (switch-to-buffer (car buffers))
+                  (switch-to-buffer (loop for buffer in buffers
+                                          if (buffer-live-p buffer)
+                                          return buffer))
                   (delete-other-windows)))
     (if dont-switch
         (persp-update-modestring)
@@ -684,18 +701,9 @@ it. In addition, if one exists already, runs BODY in it immediately."
        (with-perspective ,name ,@body))))
 
 (defun persp-set-ido-buffers ()
-  "Restrict the ido buffer to the current perspective."
-  (let ((persp-names
-         (remq nil (mapcar 'buffer-name (persp-buffers persp-curr))))
-        (indices (make-hash-table)))
-    (let ((i 0))
-      (dolist (elt ido-temp-list)
-        (puthash elt i indices)
-        (setq i (1+ i))))
-    (setq ido-temp-list
-          (sort persp-names (lambda (a b)
-                              (< (gethash a indices 10000)
-                                 (gethash b indices 10000)))))))
+  (setq ido-temp-list
+        (let ((names (remq nil (mapcar 'buffer-name (persp-buffers persp-curr)))))
+          (or (remove-if (lambda (name) (eq (string-to-char name) ? )) names) names))))
 
 (defun quick-perspective-keys ()
   "Bind quick key commands to switch to perspectives.
