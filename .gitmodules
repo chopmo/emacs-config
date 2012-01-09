@@ -4,3 +4,7 @@
 [submodule "yasnippets-shoulda"]
 	path = yasnippets-shoulda
 	url = git://github.com/rwc9u/yasnippets-shoulda.git
+
+[submodule "org2blog"]
+	path = org2blog
+	url = git@github.com:chopmo/org2blog.git
