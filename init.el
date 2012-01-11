@@ -591,10 +591,15 @@
    "^\\*Backtrace\\*$"))
 
 
+(defun jpt-try-window (window)
+  (if (window-live-p window)
+        window
+      (first (window-list))))
+
 (defun jpt-window-for-buffer (buffer)
   (if (string-match "\\*magit" (buffer-name buffer))
-      jpt-magit-window
-    grb-temporary-window))
+      (jpt-try-window jpt-magit-window)
+    (jpt-try-window grb-temporary-window)))
 
 (defun grb-special-display (buffer &optional data)
   (let ((window (jpt-window-for-buffer buffer)))
