@@ -411,7 +411,7 @@
 (require 'paren) (show-paren-mode t)
 (setq message-log-max 512)
 
-(setq-default truncate-partial-width-windows nil)
+(setq-default truncate-partial-width-windows t)
 (setq query-replace-highlight t)
 (setq search-highlight t)
 (setq kill-whole-line t)
@@ -505,7 +505,7 @@
 
 
 (setq org2blog/wp-confirm-post t)
-(setq org2blog/wp-use-sourcecode-shortcode t)
+(setq org2blog/wp-use-sourcecode-shortcode nil)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -610,3 +610,5 @@
 (setq special-display-function #'grb-special-display)
 
 (jpt-setup-windows)
+
+ (setq org-mobile-directory "~/Dropbox/mobileorg")
